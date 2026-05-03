@@ -6,7 +6,6 @@ import { FadeUp } from "./FadeUp";
 const desireBottleHim = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%209/her.png";
 const desireBottle = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%206/Desire%20Black.png";
 const heroVideo = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%205/Background%20for%20Main%20Page%20(Looping).mp4";
-const heroVideoPoster = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%209/her.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -113,12 +112,11 @@ export function Hero() {
       >
         <video
           src={heroVideo}
-          poster={heroVideoPoster}
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="h-full w-full object-cover"
           ref={(el) => {
             if (el) el.playbackRate = 1.0;
