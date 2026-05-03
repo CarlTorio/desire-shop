@@ -695,19 +695,12 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
 
   const BUNDLES = variant === "couple" ? BUNDLES_COUPLE : BUNDLES_HIM;
 
-  const ALL_PRODUCT_IMAGES = [
-    ...PRODUCT_IMAGES_HIM,
-    ...PRODUCT_IMAGES_HER,
-    ...PRODUCT_IMAGES_COUPLE,
-  ];
-
-  // Preload all variant images on mount so switching is instant
+  // Preload only the FIRST image of the current variant for fast initial paint.
+  // Other variants will load on demand when the user switches.
   useEffect(() => {
-    ALL_PRODUCT_IMAGES.forEach((img) => {
-      const i = new Image();
-      i.src = img.src;
-    });
-  }, []);
+    const i = new Image();
+    i.src = PRODUCT_IMAGES[0].src;
+  }, [variant]);
 
   // Reset to first image whenever the variant changes
   useEffect(() => {
@@ -769,14 +762,8 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
                     onClick={() => setCurrentImg(idx)}
                     aria-label={`View ${img.label}`}
                   >
-                    <img src={img.src} alt={img.label} className="pdp-thumb-img" decoding="sync" loading="eager" />
+                    <img src={img.src} alt={img.label} className="pdp-thumb-img" decoding="async" loading="lazy" />
                   </button>
-                ))}
-              </div>
-              {/* Hidden preloader: keeps every variant's images warm in the browser cache */}
-              <div aria-hidden className="pdp-preloader">
-                {ALL_PRODUCT_IMAGES.map((img) => (
-                  <img key={img.src} src={img.src} alt="" decoding="async" loading="eager" />
                 ))}
               </div>
             </div>
@@ -1665,7 +1652,7 @@ function SilentStruggleSection() {
               alt={s.alt}
               width={512}
               height={512}
-              loading="eager"
+              loading="lazy"
               decoding="async"
               style={{
                 position: "absolute",
