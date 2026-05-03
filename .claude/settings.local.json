@@ -4,7 +4,8 @@
       "Bash(npm run *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -sI \"https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%209/Main%201%20\\(1\\).png\")"
     ]
   }
 }

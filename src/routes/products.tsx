@@ -695,10 +695,23 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
 
   const BUNDLES = variant === "couple" ? BUNDLES_COUPLE : BUNDLES_HIM;
 
-  // Preload all images of the CURRENT variant so all 5 product images appear immediately.
-  // Other variants load on demand when the user switches.
+  // Preload ALL variant images (Him, Her, Couple) on first mount so switching
+  // between variants is instant and never re-downloads.
+  // Step 1: load the current variant first (priority).
+  // Step 2: load the other two variants in the background after current is queued.
   useEffect(() => {
     PRODUCT_IMAGES.forEach((img) => {
+      const i = new Image();
+      i.src = img.src;
+    });
+
+    const otherVariants = [
+      ...PRODUCT_IMAGES_HIM,
+      ...PRODUCT_IMAGES_HER,
+      ...PRODUCT_IMAGES_COUPLE,
+    ].filter((img) => !PRODUCT_IMAGES.some((p) => p.src === img.src));
+
+    otherVariants.forEach((img) => {
       const i = new Image();
       i.src = img.src;
     });
