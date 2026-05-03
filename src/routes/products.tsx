@@ -695,11 +695,13 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
 
   const BUNDLES = variant === "couple" ? BUNDLES_COUPLE : BUNDLES_HIM;
 
-  // Preload only the FIRST image of the current variant for fast initial paint.
-  // Other variants will load on demand when the user switches.
+  // Preload all images of the CURRENT variant so all 5 product images appear immediately.
+  // Other variants load on demand when the user switches.
   useEffect(() => {
-    const i = new Image();
-    i.src = PRODUCT_IMAGES[0].src;
+    PRODUCT_IMAGES.forEach((img) => {
+      const i = new Image();
+      i.src = img.src;
+    });
   }, [variant]);
 
   // Reset to first image whenever the variant changes
@@ -762,7 +764,7 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
                     onClick={() => setCurrentImg(idx)}
                     aria-label={`View ${img.label}`}
                   >
-                    <img src={img.src} alt={img.label} className="pdp-thumb-img" decoding="async" loading="lazy" />
+                    <img src={img.src} alt={img.label} className="pdp-thumb-img" decoding="async" loading="eager" />
                   </button>
                 ))}
               </div>
@@ -1652,7 +1654,7 @@ function SilentStruggleSection() {
               alt={s.alt}
               width={512}
               height={512}
-              loading="lazy"
+              loading="eager"
               decoding="async"
               style={{
                 position: "absolute",
