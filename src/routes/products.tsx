@@ -821,7 +821,8 @@ export function ProductDesireMen({ initialVariant = "him" }: { initialVariant?: 
                     onClick={() => {
                       const v2 = v.id as ProductVariant;
                       setVariant(v2);
-                      navigate({ to: VARIANT_ROUTES[v2] as "/products/desire-men" });
+                      // Update URL silently without re-mounting the component
+                      window.history.replaceState({}, "", VARIANT_ROUTES[v2]);
                     }}
                     aria-pressed={variant === v.id}
                     type="button"
