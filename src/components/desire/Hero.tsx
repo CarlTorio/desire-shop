@@ -2,11 +2,11 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FadeUp } from "./FadeUp";
+import heroVideoPoster from "@/assets/hero-first-frame.png";
 
 const desireBottleHim = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%209/her.png";
 const desireBottle = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/Desire%206/Desire%20Black.png";
 const heroVideo = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/D/Background%20for%20Main%20Page%20(Looping)%20(1).mp4";
-const heroVideoPoster = "https://qmfzkvfxjheyhrweyshl.supabase.co/storage/v1/object/public/D/first%20frame.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
