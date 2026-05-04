@@ -112,7 +112,6 @@ export function Hero() {
       >
         <video
           src={heroVideo}
-          autoPlay
           loop
           muted
           playsInline
@@ -120,6 +119,10 @@ export function Hero() {
           className="h-full w-full object-cover"
           ref={(el) => {
             if (el) el.playbackRate = 1.0;
+          }}
+          onCanPlayThrough={(e) => {
+            const v = e.currentTarget;
+            if (v.paused) v.play().catch(() => {});
           }}
         />
       </motion.div>
